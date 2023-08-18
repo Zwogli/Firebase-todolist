@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   todos$: Observable<any>; // $ = kenzeichnet eine sich selbst updatende Variable, Observable = aktualiesiert Variable
   firestore: Firestore = inject(Firestore); // import Firestore
-  todos:Array<any>;
+  todoText:string = '';
 
   constructor() {
     const itemCollection = collection(this.firestore, 'todos'); // greift im Firestore auf die gewünschte Sammlung zu
@@ -18,9 +18,11 @@ export class AppComponent {
 
     /** aktualiesiert todolist */
     this.todos$.subscribe((newTodos) => {
-      // console.log('new todos ', newTodos);
-      this.todos = newTodos;
-      console.log('new todos ', this.todos);
+      console.log('new todos ', this.todos$);
     })
+  }
+
+  addTodo(){
+    console.log(this.todoText)
   }
 }

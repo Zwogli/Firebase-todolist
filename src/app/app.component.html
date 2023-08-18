@@ -1,2 +1,12 @@
 <h1>Todolist</h1>
-<li *ngFor="let i of todos">{{ i.name }}</li>gi
+
+<form action="">
+  <!-- [(ngModel)]="[variable]" = two way binding -->
+  <input [(ngModel)]="todoText" placeholder="New Todo" type="text" name="todo-input" required>
+  <button (click)="addTodo()">Hinzufügen</button>
+</form>
+
+<ul>
+  <!-- todos$ = asnyc variable -->
+  <li *ngFor="let todo of todos$ | async">{{ todo.name }}</li>
+</ul>
