@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'firebase-todolist';
+  todos$: Observable<any>; // $ = kenzeichnet eine sich selbst updatende Variable, Observable = aktualiesiert Variable
+  firestore: Firestore = inject(Firestore); // import Firestore
+  todos:Array<any>;
+
+  constructor() {
+    const itemCollection = collection(this.firestore, 'todos'); // greift im Firestore auf die gewünschte Sammlung zu
+    this.todos$ = collectionData(itemCollection);
+
+    /** aktualiesiert todolist */
+    this.todos$.subscribe((newTodos) => {
+      // console.log('new todos ', newTodos);
+      this.todos = newTodos;
+      console.log('new todos ', this.todos);
+    })
+  }
 }

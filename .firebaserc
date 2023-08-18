@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fir-todolist-dea26": {
+      "hosting": {
+        "firebase-todolist": [
+          "fir-todolist-dea26"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fir-todolist-dea26"
+  }
+}
