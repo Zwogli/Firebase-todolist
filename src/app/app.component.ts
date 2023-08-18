@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,5 +24,7 @@ export class AppComponent {
 
   addTodo(){
     console.log(this.todoText)
+    const coll = collection(this.firestore, 'todos');
+    setDoc(doc(coll), {name: this.todoText});
   }
 }
